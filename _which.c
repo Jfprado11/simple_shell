@@ -40,6 +40,7 @@ char *_which(char *command)
 			i++;
 		}
 	}
+	free(args_path);
 	return (NULL);
 }
 

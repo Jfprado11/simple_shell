@@ -13,6 +13,19 @@
 /*GLOBAL VARIABLE*/
 extern char **environ;
 
+/*STRUCTURES*/
+
+/**
+ *struct built_in - to know which builtin to use
+ *@name: name of the builtin to compare
+ *@func: the function of the builtin
+ */
+typedef struct built_in
+{
+char *name;
+int (*func)(char **command);
+} ours_built_in;
+
 /*MAIN PROTOTYPES*/
 int interactive_mode(void);
 int non_interactive(void);
@@ -32,5 +45,10 @@ unsigned int _strlenconst(const char *p);
 char *_strdup(char *str);
 char *str_concat_path(char *str1, char *str2);
 int strcmp_var(char *s1, const char *s2);
+int _strcmp(char *s1, char *s2);
+
+/*BUILT IN FUNCTION*/
+int bi_exit(char **command __attribute__((unused)));
+int bi_env(char **command __attribute__((unused)));
 
 #endif /*_HOLBERTON_H_*/

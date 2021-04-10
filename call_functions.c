@@ -72,20 +72,28 @@ char **split_line(char *line)
 int interpreter(char **command)
 {
 	char *path_name;
-	int buildint_result = 0, exec_result;
+	int i = 0, exec_result;
+	ours_built_in built_cmp[] = {
+		{"exit", bi_exit},
+		{"env", bi_env},
+		{NULL, NULL}
+	};
 
 	if (command[0] == NULL)
 	{
 		return (1);
 	}
 	/*verificar si es build int*/
-	/*buildint_result = buildint(command)*/
-	if (buildint_result == 0)
+	while(built_cmp[i].name != NULL)
 	{
-		path_name = _which(command[0]); /*recive the path of the executable command*/
-		exec_result = execute(command, path_name);
-		free(path_name);
-		return (exec_result);
+		if (strcmp(command[0], built_cmp[i].name) == 0)
+		{
+			return (built_cmp[i].func(command));
+		}
+		i++;
 	}
-	return (1);
+	path_name = _which(command[0]); /*recive the path of the executable command*/
+	exec_result = execute(command, path_name);
+	free(path_name);
+	return (exec_result);
 }
