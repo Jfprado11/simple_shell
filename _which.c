@@ -20,7 +20,7 @@ char *_which(char *command)
 	else
 	{
 		pth = _getenv(env_var);
-		args_path = slpit_line(pth);
+		args_path = split_line(pth);
 		while (args_path[i])
 		{
 			temp = str_concat_path(args_path[i], command);
@@ -56,7 +56,7 @@ char *_getenv(const char *name)
 
 	while (environ[i])
 	{
-		result = _strcmp(environ[i], name);
+		result = strcmp_var(environ[i], name);
 		if (result == 0)
 		{
 			env = environ[i] + len;
@@ -84,7 +84,7 @@ char *str_concat_path(char *str1, char *str2)
 	}
 	if (str2 == NULL)
 	{
-		str2 == "";
+		str2 = "";
 	}
 	len1 = _strlen(str1);
 	len2 = _strlen(str2);
@@ -106,4 +106,29 @@ char *str_concat_path(char *str1, char *str2)
 	}
 	*(concat + i + j) = '\0';
 	return (concat);
+}
+/**
+ * strcmp_var - find the env variable wated
+ *@s1: first string to be compare
+ *@s2: the stting that matches with first one
+ *
+ *Return: 0 as matched. 1 as unmatched
+ */
+int strcmp_var(char *s1, const char *s2)
+{
+	int i = 0, j = 0;
+
+	while (s1[j] != '=')
+	{
+		if (s1[j] != s2[j])
+		{
+			i = 1;
+			break;
+		}
+		j++;
+	}
+	if (i == 0)
+		return (0);
+	else
+		return (1);
 }

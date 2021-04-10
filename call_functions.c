@@ -16,8 +16,8 @@ char *read_line(void)
 	{
 		free(line);
 		write(1, "\n", 1);
-		exit(0);/*CODIGO */
-	}
+		exit(3);
+    }
 	return (line);
 }
 /**
@@ -26,7 +26,7 @@ char *read_line(void)
  *
  * Return: an array of arrays or NULL if fails
  */
-char **slpit_line(char *line)
+char **split_line(char *line)
 {
 	unsigned int bufsize = 64, buf_position = 0, new_bufsize = 0;
 	char **array_tokens = NULL;
@@ -76,14 +76,13 @@ int interpreter(char **command)
 
 	if (command[0] == NULL)
 	{
-		perror(command[0]);
 		return (1);
 	}
 	/*verificar si es build int*/
 	/*buildint_result = buildint(command)*/
 	if (buildint_result == 0)
 	{
-		path_name = _witch(command[0]); /*recive the path of the executable command*/
+		path_name = _which(command[0]); /*recive the path of the executable command*/
 		exec_result = execute(command, path_name);
 		free(path_name);
 		return (exec_result);
