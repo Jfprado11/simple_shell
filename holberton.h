@@ -35,6 +35,7 @@ char **split_line(char *line);
 int interpreter(char **command);
 char *_which(char *command);
 int execute(char **command, char *path_name);
+char *_read(void);
 
 /*OWN_PROTOTYPES_FUNCTIONS*/
 char *_getenv(const char *name);
@@ -46,6 +47,7 @@ char *_strdup(char *str);
 char *str_concat_path(char *str1, char *str2);
 int strcmp_var(char *s1, const char *s2);
 int _strcmp(char *s1, char *s2);
+
 
 /*BUILT IN FUNCTION*/
 int bi_exit(char **command __attribute__((unused)));
