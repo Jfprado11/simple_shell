@@ -11,7 +11,7 @@ int non_interactive(void)
 	char *line = NULL;
 	char **arg = NULL;
 	int len = 0;
-	char *aux;
+	char *aux = NULL;
 
 	aux = malloc(sizeof(char) * 1024);
 	line = _read();
@@ -23,42 +23,35 @@ int non_interactive(void)
 	{
 		aux = _strdupp(line + len);
 		len += _strlen(aux) + 1;
-		printf("aux = %s\n", aux);
 		arg = split_line(aux);
-		printf("arg = %s y %s\n", arg[0], arg [1]);
 		interpreter(arg);
 		free(arg);
 		free(aux);
 	}
-	//arg = split_line(line);
-	//interpreter(arg);/*VER COMO HACER PARA QUE LEA VARAIOS COMANDOS*/
-
 	free(line);
-	//free(arg);
 	return (0);
 }
 
 /**
- * _read -
+ * _read - read the user's input in non interactive mode
  *
- * return: vvv
+ * Return: the line readed
  */
 char *_read(void)
 {
 	char *line = NULL;
-	size_t bufsize = 0;
 	ssize_t readline;
 
 	line = malloc(sizeof(char) * 1024);
 	readline = read(STDIN_FILENO, line, 1024);
-	if(readline == 1)
+	if (readline == 1)
 	{
 		return (NULL);
 	}
 	return (line);
 }
 /**
- *_strdup - returns a pointer to a newly allocated space in memory an copied
+ *_strdupp - returns a pointer to a newly allocated space in memory an copied
  *@str: the string that we copied
  *
  *Return: a pointer

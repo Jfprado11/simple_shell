@@ -16,27 +16,28 @@ char *read_line(void)
 	{
 		free(line);
 		write(1, "\n", 1);
-		exit(3);
-    }
+		exit(0);
+	}
 	return (line);
 }
 /**
- * slpit_line - tokenize the line into an array
- * @line: the line we got from user's input
+ *split_line - tokenize the line into an array
+ *@line: the line we got from user's input
  *
- * Return: an array of arrays or NULL if fails
+ *Return: an array of arrays or NULL if fails
  */
 char **split_line(char *line)
 {
 	unsigned int bufsize = 64, buf_position = 0, new_bufsize = 0;
 	char **array_tokens = NULL;
-	char *single_token, *delimit = " \t\r\n\a:";
+	char *single_token = NULL, *delimit = " \t\r\n\a:";
 	char *aux_line = NULL;
 
 	aux_line = _strdup(line);
 	array_tokens = malloc(bufsize * sizeof(char *));
 	if (!array_tokens)
 	{
+		free(aux_line); /*exit?????*/
 		return (NULL); /*MENSAJE DE ERROR???????*/
 	}
 	single_token = strtok(aux_line, delimit); /*MALLOC????*/
@@ -63,10 +64,10 @@ char **split_line(char *line)
 	return (array_tokens);
 }
 /**
- * interpreter - interpet the command & proceed to execut it
- * @command: Is the array of arguments (command[0] is the name of the command)
+ *interpreter - interpet the command & proceed to execut it
+ *@command: Is the array of arguments (command[0] is the name of the command)
  *
- * Return 1 to status in succes, 0 if command[0] is "exit".
+ *Return: 1 to status in succes, 0 if command[0] is "exit".
  */
 
 int interpreter(char **command)
@@ -84,15 +85,20 @@ int interpreter(char **command)
 		return (1);
 	}
 	/*verificar si es build int*/
-	while(built_cmp[i].name != NULL)
+	while (built_cmp[i].name != NULL)
 	{
-		if (strcmp(command[0], built_cmp[i].name) == 0)
+		if (_strcmp(command[0], built_cmp[i].name) == 0)
 		{
 			return (built_cmp[i].func(command));
 		}
 		i++;
 	}
 	path_name = _which(command[0]); /*recive the path of the executable command*/
+	if (path_name == NULL)
+	{
+		perror(command[0]);
+		return (1);
+	}
 	exec_result = execute(command, path_name);
 	free(path_name);
 	return (exec_result);

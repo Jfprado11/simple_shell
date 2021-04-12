@@ -7,7 +7,7 @@
  */
 char *_which(char *command)
 {
-	char *pth = NULL, *temp = NULL;
+	char *pth = NULL, *path_name = NULL;
 	char **args_path = NULL;
 	const char *env_var = "PATH";
 	int i = 0, check_accsess;
@@ -23,19 +23,19 @@ char *_which(char *command)
 		args_path = split_line(pth);
 		while (args_path[i])
 		{
-			temp = str_concat_path(args_path[i], command);
-			if (stat(temp, &st) == 0)
+			path_name = str_concat_path(args_path[i], command);
+			if (stat(path_name, &st) == 0)
 			{
-				check_accsess = access(temp, X_OK);
+				check_accsess = access(path_name, X_OK);
 				if (check_accsess == 0)
 				{
 					free(args_path);
-					return (temp);
+					return (path_name);
 				}
 			}
 			else
 			{
-				free(temp);
+				free(path_name);
 			}
 			i++;
 		}
