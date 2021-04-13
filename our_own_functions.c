@@ -65,11 +65,11 @@ char *_memcpy(char *dest, char *src, unsigned int n)
  */
 int _strlen(char *s)
 {
-	int lon = 0; /*counter for each character*/
+	int lon = 0, i = 0; /*counter for each character*/
 
-	while (*s != 0)
+	while (s[i] != '\0')
 	{
-		s++;
+		i++;
 		lon++;
 	}
 	return (lon);
@@ -83,8 +83,8 @@ int _strlen(char *s)
 char *_strdup(char *str)
 {
 	int len = 0, i = 0;
-	char *dup;
-	char *duppass;
+	char *dup = NULL;
+	char *duppass = NULL;
 
 	if (str == NULL)
 	{

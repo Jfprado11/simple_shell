@@ -43,6 +43,10 @@ char *_read(void)
 	ssize_t readline;
 
 	line = malloc(sizeof(char) * 1024);
+	if (line == NULL)
+	{
+		return (NULL);
+	}
 	readline = read(STDIN_FILENO, line, 1024);
 	if (readline == 1)
 	{

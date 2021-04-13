@@ -52,7 +52,7 @@ char *_which(char *command)
 char *_getenv(const char *name)
 {
 	int result, i = 0;
-	char *env;
+	char *env = NULL;
 	int len = (_strlenconst(name) + 1);
 
 	while (environ[i])
@@ -77,7 +77,7 @@ char *_getenv(const char *name)
 char *str_concat_path(char *str1, char *str2)
 {
 	int len1, len2, i, j;
-	char *concat;
+	char *concat = NULL;
 
 	if (str1 == NULL)
 	{
