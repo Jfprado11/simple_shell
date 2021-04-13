@@ -30,13 +30,11 @@ int (*func)(char **command);
 int interactive_mode(void);
 int non_interactive(void);
 
-char *read_line(void);
 char **split_line(char *line);
 int interpreter(char **command);
-char *_which(char *command);
+char *_which(char *command, int *stat_path);
 int execute(char **command, char *path_name);
 char *_read(void);
-void free_matrix(char **array);
 
 /*OWN_PROTOTYPES_FUNCTIONS*/
 char *_getenv(const char *name);
@@ -48,6 +46,7 @@ char *_strdup(char *str);
 char *str_concat_path(char *str1, char *str2);
 int strcmp_var(char *s1, const char *s2);
 int _strcmp(char *s1, char *s2);
+char *_strdupp(char *str);
 
 
 /*BUILT IN FUNCTION*/
