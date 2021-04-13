@@ -1,47 +1,83 @@
 #include "holberton.h"
 
+char *w_strdupp(char *str);
+
 /**
  * _which - search the full path and concatenates whit the command.
  * @command: name of the command.
  * Return: The path with the executable command or NULL if doesn't exist.
  */
-char *_which(char *command)
+char *_which(char *command, int *stat_path)
 {
 	char *pth = NULL, *path_name = NULL;
-	char **args_path = NULL;
+	char *aux_line = NULL;
 	const char *env_var = "PATH";
-	int i = 0, check_accsess;
+	int check_accsess = 0, len = 0;
 	struct stat st;
 
 	if (stat(command, &st) == 0)
 	{
+		*stat_path = 1;
 		return (command);
 	}
 	else
 	{
 		pth = _getenv(env_var);
-		args_path = split_line(pth);
-		while (args_path[i])
+		while (*(pth + len))
 		{
-			path_name = str_concat_path(args_path[i], command);
+			aux_line = w_strdupp(pth + len);
+			len += _strlen(aux_line) + 1;
+			path_name = str_concat_path(aux_line, command);
 			if (stat(path_name, &st) == 0)
 			{
 				check_accsess = access(path_name, X_OK);
 				if (check_accsess == 0)
 				{
-					free(args_path);
+					free(aux_line);
 					return (path_name);
 				}
 			}
 			else
 			{
+				free(aux_line);
 				free(path_name);
 			}
-			i++;
 		}
 	}
-	free(args_path);
+	/*HAY QUE BUSCAR EN DIRECTORIO ACTUAL? ESO NO LO HACE LA SHELL*/
 	return (NULL);
+}
+/**
+ *_strdupp - returns a pointer to a newly allocated space in memory an copied
+ *@str: the string that we copied
+ *
+ *Return: a pointer
+ */
+char *w_strdupp(char *str)
+{
+	int len = 0, i = 0;
+	char *dup;
+	char *duppass;
+
+	if (str == NULL)
+	{
+		return (NULL);
+	}
+	len = _strlen(str);
+	dup = malloc(sizeof(char) * len + 1);
+	if (dup == NULL)
+	{
+		return (NULL);
+	}
+	duppass = dup;
+	while (str[i] != ':')
+	{
+		*duppass = str[i];
+		duppass++;
+		i++;
+	}
+	*duppass = '\0';
+	return (dup);
 }
 
 /**
@@ -52,7 +88,7 @@ char *_which(char *command)
 char *_getenv(const char *name)
 {
 	int result, i = 0;
-	char *env;
+	char *env = NULL;
 	int len = (_strlenconst(name) + 1);
 
 	while (environ[i])
@@ -77,7 +113,7 @@ char *_getenv(const char *name)
 char *str_concat_path(char *str1, char *str2)
 {
 	int len1, len2, i, j;
-	char *concat;
+	char *concat = NULL;
 
 	if (str1 == NULL)
 	{

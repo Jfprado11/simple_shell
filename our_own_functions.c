@@ -80,11 +80,11 @@ int _strlen(char *s)
  *
  *Return: a pointer
  */
-char *_strdup(char *str)
+char *_strdup(char *str) /*creo que ya no se usa*/
 {
 	int len = 0, i = 0;
-	char *dup;
-	char *duppass;
+	char *dup = NULL;
+	/**char *duppass = NULL;*/
 
 	if (str == NULL)
 	{
@@ -96,14 +96,14 @@ char *_strdup(char *str)
 	{
 		return (NULL);
 	}
-	duppass = dup;
+	/*duppass = dup;*/
 	while (str[i] != '\0')
 	{
-		*duppass = str[i];
-		duppass++;
+		dup[i] = str[i];
+		/*duppass++;*/
 		i++;
 	}
-	*duppass = '\0';
+	dup[i] = '\0';
 	return (dup);
 }
 /**

@@ -1,5 +1,4 @@
 #include "holberton.h"
-char *_strdupp(char *str);
 
 /**
  * non_interactive - execute the command that recive and finish
