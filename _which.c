@@ -23,7 +23,7 @@ char *_which(char *command, int *stat_path)
 	else
 	{
 		pth = _getenv(env_var);
-		while (*(pth + len))
+		while (pth[len - 1] != '\0')
 		{
 			aux_line = w_strdupp(pth + len);
 			len += _strlen(aux_line) + 1;
@@ -70,7 +70,7 @@ char *w_strdupp(char *str)
 		return (NULL);
 	}
 	duppass = dup;
-	while (str[i] != ':')
+	while (str[i] != ':' && str[i] != '\0')
 	{
 		*duppass = str[i];
 		duppass++;

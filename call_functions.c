@@ -12,7 +12,20 @@ char **split_line(char *line)
 	unsigned int bufsize, buf_position = 0, new_bufsize = 0;
 	char **array_tokens = NULL;
 	char *single_token = NULL, *delimit = " \t\r\n\a";
+	int i = 0, check = 0;
 
+	while (line[i])
+	{
+		if (line[i] != ' ')
+		{
+			check = 1;
+		}
+		i++;
+	}
+	if (check == 0)
+	{
+		return (NULL);
+	}
 	bufsize = countWords(line);
 	array_tokens = malloc(bufsize * sizeof(char *));
 	if (!array_tokens)
@@ -89,6 +102,7 @@ int interpreter(char **command)
 		{"env", bi_env},
 		{NULL, NULL}
 	};
+
 	if (command[0] == NULL)
 	{
 		return (1);

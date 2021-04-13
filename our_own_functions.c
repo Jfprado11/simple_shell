@@ -84,11 +84,7 @@ char *_strdup(char *str) /*creo que ya no se usa*/
 {
 	int len = 0, i = 0;
 	char *dup = NULL;
-<<<<<<< HEAD
-	char *duppass = NULL;
-=======
 	/**char *duppass = NULL;*/
->>>>>>> 4704b3388adaba0929f1de98fe3888e5c1b93b85
 
 	if (str == NULL)
 	{

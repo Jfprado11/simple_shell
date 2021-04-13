@@ -12,7 +12,6 @@ int non_interactive(void)
 	int len = 0;
 	char *aux = NULL;
 
-	aux = malloc(sizeof(char) * 1024);
 	line = _read();
 	if (line == NULL)
 	{
@@ -23,6 +22,13 @@ int non_interactive(void)
 		aux = _strdupp(line + len);
 		len += _strlen(aux) + 1;
 		arg = split_line(aux);
+		if (arg == NULL)
+		{
+			free(arg);
+			free(aux);
+			free(line);
+			return (0);
+		}
 		interpreter(arg);
 		free(arg);
 		free(aux);
@@ -44,11 +50,12 @@ char *_read(void)
 	line = malloc(sizeof(char) * 1024);
 	if (line == NULL)
 	{
-		return (NULL);
+		exit(0);
 	}
 	readline = read(STDIN_FILENO, line, 1024);
-	if (readline == 1)
+	if (readline == 1 || readline == -1)
 	{
+		free(line);
 		return (NULL);
 	}
 	return (line);
@@ -62,21 +69,24 @@ char *_read(void)
 char *_strdupp(char *str)
 {
 	int len = 0, i = 0;
-	char *dup;
-	char *duppass;
+	char *dup = NULL;
+	char *duppass = NULL;
 
 	if (str == NULL)
 	{
 		return (NULL);
 	}
-	len = _strlen(str);
+	while (str[len] != '\n' && str[len] != '\0')
+	{
+		len++;
+	}
 	dup = malloc(sizeof(char) * len + 1);
 	if (dup == NULL)
 	{
 		return (NULL);
 	}
 	duppass = dup;
-	while (str[i] != '\n')
+	while (str[i] != '\n' && str[len] != '\0')
 	{
 		*duppass = str[i];
 		duppass++;

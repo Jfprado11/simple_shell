@@ -13,20 +13,20 @@ int interactive_mode(void)
 	size_t bufsize = 0;
 	ssize_t readline;
 	int status = 1; /*1 to continue in the loop, 0 to end loop*/
-	size_t bufsize = 0;
-	ssize_t readline;
 
 
 	while (status)
 	{
 		write(STDOUT_FILENO, "$ ", 2);
-		/*line = read_line(); *//*Keeps the text recived in the standar input*/
 		readline = getline(&line, &bufsize, stdin);
 		if (readline == EOF)
-			break;
+			{
+				free(line);
+				write(STDOUT_FILENO, "\n", 1);
+				return (0);
+			}
 		arg = split_line(line); /*Convert the line to an array of arguments*/
 		status = interpreter(arg); /*type_of_function(arg)*/
-
 
 		free(arg);
 	}
