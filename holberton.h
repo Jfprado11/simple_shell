@@ -35,6 +35,7 @@ int interpreter(char **command);
 char *_which(char *command, int *stat_path);
 int execute(char **command, char *path_name);
 char *_read(void);
+void free_matrix(char **array);
 
 /*OWN_PROTOTYPES_FUNCTIONS*/
 char *_getenv(const char *name);

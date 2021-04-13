@@ -30,8 +30,9 @@ int non_interactive(void)
 			return (0);
 		}
 		interpreter(arg);
-		free(arg);
-		free(aux);
+		free_matrix(arg);
+		arg = NULL;
+		aux = NULL;
 	}
 	free(line);
 	return (0);
@@ -60,38 +61,4 @@ char *_read(void)
 	}
 	return (line);
 }
-/**
- *_strdupp - returns a pointer to a newly allocated space in memory an copied
- *@str: the string that we copied
- *
- *Return: a pointer
- */
-char *_strdupp(char *str)
-{
-	int len = 0, i = 0;
-	char *dup = NULL;
-	char *duppass = NULL;
 
-	if (str == NULL)
-	{
-		return (NULL);
-	}
-	while (str[len] != '\n' && str[len] != '\0')
-	{
-		len++;
-	}
-	dup = malloc(sizeof(char) * len + 1);
-	if (dup == NULL)
-	{
-		return (NULL);
-	}
-	duppass = dup;
-	while (str[i] != '\n' && str[len] != '\0')
-	{
-		*duppass = str[i];
-		duppass++;
-		i++;
-	}
-	*duppass = '\0';
-	return (dup);
-}

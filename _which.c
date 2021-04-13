@@ -48,39 +48,6 @@ char *_which(char *command, int *stat_path)
 	return (NULL);
 }
 /**
- *_strdupp - returns a pointer to a newly allocated space in memory an copied
- *@str: the string that we copied
- *
- *Return: a pointer
- */
-char *w_strdupp(char *str)
-{
-	int len = 0, i = 0;
-	char *dup;
-	char *duppass;
-
-	if (str == NULL)
-	{
-		return (NULL);
-	}
-	len = _strlen(str);
-	dup = malloc(sizeof(char) * len + 1);
-	if (dup == NULL)
-	{
-		return (NULL);
-	}
-	duppass = dup;
-	while (str[i] != ':' && str[i] != '\0')
-	{
-		*duppass = str[i];
-		duppass++;
-		i++;
-	}
-	*duppass = '\0';
-	return (dup);
-}
-
-/**
  * _getenv - obtain the env variable requested
  * @name: name of the env varible requested to get
  * Return: the exact env variable requested

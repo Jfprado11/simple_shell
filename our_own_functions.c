@@ -75,38 +75,6 @@ int _strlen(char *s)
 	return (lon);
 }
 /**
- *_strdup - returns a pointer to a newly allocated space in memory an copied
- *@str: the string that we copied
- *
- *Return: a pointer
- */
-char *_strdup(char *str) /*creo que ya no se usa*/
-{
-	int len = 0, i = 0;
-	char *dup = NULL;
-	/**char *duppass = NULL;*/
-
-	if (str == NULL)
-	{
-		return (NULL);
-	}
-	len = _strlen(str);
-	dup = malloc(sizeof(char) * len + 1);
-	if (dup == NULL)
-	{
-		return (NULL);
-	}
-	/*duppass = dup;*/
-	while (str[i] != '\0')
-	{
-		dup[i] = str[i];
-		/*duppass++;*/
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
-}
-/**
  *_strlenconst - Tells the length or size of a const string
  *@p: varible to test the string
  *

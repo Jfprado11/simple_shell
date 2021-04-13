@@ -22,22 +22,22 @@ char **split_line(char *line)
 		}
 		i++;
 	}
-	if (check == 0)
-	{
-		return (NULL);
-	}
 	bufsize = countWords(line);
-	array_tokens = malloc(bufsize * sizeof(char *));
+	array_tokens = malloc(bufsize * sizeof(char *) + 1);
 	if (!array_tokens)
 	{
 		return (NULL); /*MENSAJE DE ERROR???????*/
 	}
+	if (check == 0)
+	{
+		free(line);
+		return (array_tokens);
+	}
 	single_token = strtok(line, delimit); /*MALLOC????*/
 	while (single_token)
 	{
-		array_tokens[buf_position] = single_token;
+		array_tokens[buf_position] = _strdup(single_token);
 		buf_position++;
-		/*este if puede morir*/
 		if (buf_position >= bufsize)
 		{
 			new_bufsize = bufsize + bufsize;
@@ -53,15 +53,18 @@ char **split_line(char *line)
 		single_token = strtok(NULL, delimit);
 	}
 	array_tokens[buf_position] = NULL;
+	free(line);
 	return (array_tokens);
 }
-/* C program to count no of words from given input string. */
-// returns number of words in str
+/**
+ * 
+ * 
+ */
 unsigned countWords(char *str)
 {
-    int state = 0;
-    unsigned wc = 0;  // word count
- 
+	int state = 0;
+	unsigned wc = 0;  // word count
+
     // Scan all characters one by one
     while (*str)
     {
@@ -69,7 +72,7 @@ unsigned countWords(char *str)
         // state as OUT
         if (*str == ' ' || *str == '\n' || *str == '\t')
             state = 0;
- 
+
         // If next character is not a word separator and
         // state is OUT, then set the state as IN and
         // increment word count
@@ -78,11 +81,8 @@ unsigned countWords(char *str)
             state = 1;
             ++wc;
         }
- 
-        // Move to next character
         ++str;
     }
- 
     return wc;
 }
 

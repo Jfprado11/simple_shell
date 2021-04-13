@@ -17,6 +17,7 @@ int interactive_mode(void)
 
 	while (status)
 	{
+		line = NULL;
 		write(STDOUT_FILENO, "$ ", 2);
 		readline = getline(&line, &bufsize, stdin);
 		if (readline == EOF)
@@ -28,8 +29,7 @@ int interactive_mode(void)
 		arg = split_line(line); /*Convert the line to an array of arguments*/
 		status = interpreter(arg); /*type_of_function(arg)*/
 
-		free(arg);
+		free_matrix(arg);
 	}
-	free(line);
 	return (0);
 }
