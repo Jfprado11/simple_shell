@@ -85,8 +85,9 @@ int interpreter(char **command)
 	char *path_name = NULL;
 	int i = 0, exec_result, stat_path = 0;
 	ours_built_in built_cmp[] = {
-		{"exit", bi_exit},
-		{"env", bi_env},
+		{"exit", bi_exit, "exit_help"},
+		{"env", bi_env, "env_help"},
+		{"help", bi_help, "help_help"},
 		{NULL, NULL}
 	};
 
