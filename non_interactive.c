@@ -19,6 +19,10 @@ int non_interactive(void)
 	}
 	while (*(line + len))
 	{
+		while (*(line + len)== '\n')
+		{
+			len += 1;
+		}
 		aux = _strdupp(line + len);
 		len += _strlen(aux) + 1;
 		arg = split_line(aux);
@@ -48,12 +52,12 @@ char *_read(void)
 	char *line = NULL;
 	ssize_t readline;
 
-	line = _calloc(1024, sizeof(char));
+	line = _calloc(4056, sizeof(char));
 	if (line == NULL)
 	{
 		exit(0);
 	}
-	readline = read(STDIN_FILENO, line, 1024);
+	readline = read(STDIN_FILENO, line, 4056);
 	if (readline == 1 || readline == -1)
 	{
 		free(line);
