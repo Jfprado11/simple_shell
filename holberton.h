@@ -9,6 +9,8 @@
 #include <sys/types.h> /*stat, wait*/
 #include <sys/wait.h> /*wait*/
 #include <sys/stat.h> /*stat, */
+#include <sys/stat.h>
+#include <fcntl.h>
 
 /*GLOBAL VARIABLE*/
 extern char **environ;
@@ -19,11 +21,13 @@ extern char **environ;
  *struct built_in - to know which builtin to use
  *@name: name of the builtin to compare
  *@func: the function of the builtin
+ *@doc_name: name of the file whit the help of each function
  */
 typedef struct built_in
 {
-char *name;
-int (*func)(char **command);
+	char *name;
+	int (*func)(char **command);
+	char *doc_name;
 } ours_built_in;
 
 /*MAIN PROTOTYPES*/
@@ -36,6 +40,8 @@ char *_which(char *command, int *stat_path);
 int execute(char **command, char *path_name);
 char *_read(void);
 void free_matrix(char **array);
+
+ssize_t read_textfile(const char *filename, size_t letters);
 
 /*OWN_PROTOTYPES_FUNCTIONS*/
 char *_getenv(const char *name);
@@ -54,5 +60,6 @@ unsigned int counter_words(char *str);
 /*BUILT IN FUNCTION*/
 int bi_exit(char **command __attribute__((unused)));
 int bi_env(char **command __attribute__((unused)));
+int bi_help(char **command __attribute__((unused)));
 
-#endif /*_HOLBERTON_H_*/
+#endif /**/
