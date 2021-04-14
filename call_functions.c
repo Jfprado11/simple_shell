@@ -18,7 +18,7 @@ char **split_line(char *line)
 		if (line[i] != ' ')
 			check = 1;
 	}
-	bufsize = countWords(line);
+	bufsize = counter_words(line);
 	array_tokens = malloc(bufsize * sizeof(char *) + 1);
 	if (!array_tokens)
 		return (NULL); /*MENSAJE DE ERROR???????*/
@@ -57,7 +57,7 @@ unsigned int counter_words(char *str)
 	int state = 0;
 	unsigned int counter = 0;
 
-	while (*str != NULL)
+	while (*str != '\0')
 	{
 		if (*str == 32 || *str == 10 || *str == 9)
 		{
