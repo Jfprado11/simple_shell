@@ -1,1 +1,32 @@
-Hola Mundo
+.\" Manpage for Simple Shell.
+.TH SIMPLE_SHELL 1 "14 April 2021"
+.SH NAME
+.B SIMPLE_SHELL
+- simple UNIX command interpreter.
+.SH SYNOPSIS
+.B Simple Shell
+[COMMAND_NAME][COMMAND_STRING | FILE]
+.SH DESCRIPTION
+simple shell is a simple UNIX command interpreter,
+can executes commands read from the standard input or from a file.
+Simple Shell can be execute in two ways, the interactive and non-interactive mode.
+.SH BUILT-IN
+The Simple Shell has as built-in functions:
+.TP
+.BR env
+Prints the current environment.
+Usage:
+env
+.TP
+.BR exit
+Exits the shell (do not handle arguments)
+Usage:
+exit
+.TP help:
+.BR Display the help information about built-in functions.
+Usage:
+help [BUILTIN]
+
+
+.SH Authors
+Paula Louvani Hernandez and Juan Felipe Prado
