@@ -21,11 +21,11 @@ int interactive_mode(void)
 		write(STDOUT_FILENO, "$ ", 2);
 		readline = getline(&line, &bufsize, stdin);
 		if (readline == EOF)
-			{
-				free(line);
-				write(STDOUT_FILENO, "\n", 1);
-				return (0);
-			}
+		{
+			free(line);
+			write(STDOUT_FILENO, "\n", 1);
+			return (0);
+		}
 		arg = split_line(line); /*Convert the line to an array of arguments*/
 		status = interpreter(arg); /*type_of_function(arg)*/
 

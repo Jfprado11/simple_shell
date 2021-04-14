@@ -1,5 +1,4 @@
 #include  "holberton.h"
-unsigned countWords(char *str);
 
 /**
  *split_line - tokenize the line into an array
@@ -14,20 +13,15 @@ char **split_line(char *line)
 	char *single_token = NULL, *delimit = " \t\r\n\a";
 	int i = 0, check = 0;
 
-	while (line[i])
+	for (i = 0; line[i] != '\0'; i++)
 	{
 		if (line[i] != ' ')
-		{
 			check = 1;
-		}
-		i++;
 	}
 	bufsize = countWords(line);
 	array_tokens = malloc(bufsize * sizeof(char *) + 1);
 	if (!array_tokens)
-	{
 		return (NULL); /*MENSAJE DE ERROR???????*/
-	}
 	if (check == 0)
 	{
 		free(line);
@@ -45,10 +39,7 @@ char **split_line(char *line)
 			new_bufsize * sizeof(char *));
 			bufsize += bufsize;
 			if (!array_tokens)
-			{
-				perror("hsh: allocation error\n");
 				exit(0);
-			}
 		}
 		single_token = strtok(NULL, delimit);
 	}
@@ -57,33 +48,29 @@ char **split_line(char *line)
 	return (array_tokens);
 }
 /**
- * 
- * 
+ * counter_words - counter of words in a string
+ * @str: the string
+ * Return: a unsigned int number
  */
-unsigned countWords(char *str)
+unsigned int counter_words(char *str)
 {
 	int state = 0;
-	unsigned wc = 0;  // word count
+	unsigned int counter = 0;
 
-    // Scan all characters one by one
-    while (*str)
-    {
-        // If next character is a separator, set the
-        // state as OUT
-        if (*str == ' ' || *str == '\n' || *str == '\t')
-            state = 0;
-
-        // If next character is not a word separator and
-        // state is OUT, then set the state as IN and
-        // increment word count
-        else if (state == 0)
-        {
-            state = 1;
-            ++wc;
-        }
-        ++str;
-    }
-    return wc;
+	while (*str != NULL)
+	{
+		if (*str == 32 || *str == 10 || *str == 9)
+		{
+			state = 0;
+		}
+		else if (state == 0)
+		{
+			state = 1;
+			++counter;
+		}
+		++str;
+	}
+	return (counter);
 }
 
 /**
@@ -116,7 +103,8 @@ int interpreter(char **command)
 		}
 		i++;
 	}
-	path_name = _which(command[0], &stat_path); /*recive the path of the executable command*/
+	/*recive the path of the executable command*/
+	path_name = _which(command[0], &stat_path);
 	if (path_name == NULL)
 	{
 		perror(command[0]);

@@ -48,7 +48,7 @@ char *_read(void)
 	char *line = NULL;
 	ssize_t readline;
 
-	line = malloc(sizeof(char) * 1024);
+	line = _calloc(1024, sizeof(char));
 	if (line == NULL)
 	{
 		exit(0);

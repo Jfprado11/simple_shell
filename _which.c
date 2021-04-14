@@ -5,6 +5,7 @@ char *w_strdupp(char *str);
 /**
  * _which - search the full path and concatenates whit the command.
  * @command: name of the command.
+ * @stat_path: number to check user type the full path.
  * Return: The path with the executable command or NULL if doesn't exist.
  */
 char *_which(char *command, int *stat_path)

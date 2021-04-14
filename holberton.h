@@ -48,7 +48,8 @@ char *str_concat_path(char *str1, char *str2);
 int strcmp_var(char *s1, const char *s2);
 int _strcmp(char *s1, char *s2);
 char *_strdupp(char *str);
-
+void *_calloc(unsigned int nmemb, unsigned int size);
+unsigned int counter_words(char *str);
 
 /*BUILT IN FUNCTION*/
 int bi_exit(char **command __attribute__((unused)));

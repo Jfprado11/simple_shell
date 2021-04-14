@@ -66,7 +66,7 @@ char *_strdupp(char *str)
 	return (dup);
 }
 /**
- *_strdupp - returns a pointer to a newly allocated space in memory an copied
+ *w_strdupp - returns a pointer to a newly allocated space in memory an copied
  *@str: the string that we copied
  *
  *Return: a pointer
