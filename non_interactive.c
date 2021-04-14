@@ -31,8 +31,6 @@ int non_interactive(void)
 		}
 		interpreter(arg);
 		free_matrix(arg);
-		arg = NULL;
-		aux = NULL;
 	}
 	free(line);
 	return (0);

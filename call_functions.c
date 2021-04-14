@@ -18,6 +18,11 @@ char **split_line(char *line)
 		if (line[i] != ' ')
 			check = 1;
 	}
+	if (line[i] == '\n')
+	{
+		free(line);
+		return(NULL);
+	}
 	bufsize = counter_words(line);
 	array_tokens = malloc(bufsize * sizeof(char *) + 1);
 	if (!array_tokens)
