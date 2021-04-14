@@ -88,7 +88,7 @@ int interpreter(char **command)
 		{"exit", bi_exit, "exit_help"},
 		{"env", bi_env, "env_help"},
 		{"help", bi_help, "help_help"},
-		{NULL, NULL}
+		{NULL, NULL, NULL}
 	};
 
 	if (command[0] == NULL)

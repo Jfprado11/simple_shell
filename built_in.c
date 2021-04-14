@@ -35,19 +35,19 @@ int bi_env(char **command __attribute__((unused)))
  */
 int bi_help(char **command __attribute__((unused)))
 {
-	int i = 0, n_bytes = 0;
+	int i = 0;
 	ours_built_in built_cmp[] = {
 		{"exit", bi_exit, "exit_help"},
 		{"env", bi_env, "env_help"},
 		{"help", bi_help, "help_help"},
-		{NULL, NULL}
+		{NULL, NULL, NULL}
 	};
 
 	while (built_cmp[i].name != NULL)
 	{
 		if (_strcmp(command[1], built_cmp[i].name) == 0)
 		{
-			n_bytes = read_textfile(built_cmp[i].doc_name, 1024);
+			read_textfile(built_cmp[i].doc_name, 1024);
 		}
 		i++;
 	}
