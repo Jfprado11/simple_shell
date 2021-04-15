@@ -10,23 +10,51 @@
 simple shell is a simple UNIX command interpreter,
 can executes commands read from the standard input or from a file.
 Simple Shell can be execute in two ways, the interactive and non-interactive mode.
+.SH RETURN
+the program returns 0 on success or 127 on errors
+.SH OPTIONS
+The simple_shell does not take any options.
+.SH INSTALLATION
+To be able to use the shell, compile in the following way
+
+.B gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 .SH BUILT-IN
 The Simple Shell has as built-in functions:
 .TP
 .BR env
-Prints the current environment.
-Usage:
+With the command env, Simple Shell display, in the standar output, all the variables store in the environment.
+
+.BR Usage:
 env
 .TP
 .BR exit
-Exits the shell (do not handle arguments)
-Usage:
+Exits the shell, return a valuo of 0 on success and 127 if the command typed is not found. (do not handle arguments)
+
+.BR Usage:
 exit
-.TP help:
-.BR Display the help information about built-in functions.
-Usage:
+.TP
+.BR help:
+Display the help information about built-in functions.
+
+.BR Usage:
 help [BUILTIN]
 
+.SH EXAMPLE
+In the interctive mode type <./hsh> and hit enter
+.PP
+.B ./hsh
+.PP
+Wait for the prompt <$> to type the commands with the respectives arguments and hit enter.
+.PP
+.B $ [command_name]
+
+In the non-interctive mode type echo with the commands or a file with commands. Then use a pipeline to send it to the simple shell.
+.PP
+.B echo "[comand_name]" | ./hsh
+.PP
+.B [commands_file] | ./hsh
+.SH BUGS
+On exit status is not correct yet.
 
 .SH Authors
-Paula Louvani Hernandez and Juan Felipe Prado
+\fIPaula Louvani Hernandez and Juan Felipe Prado.\fP
