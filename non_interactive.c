@@ -19,7 +19,7 @@ int non_interactive(void)
 	}
 	while (*(line + len))
 	{
-		while (*(line + len)== '\n')
+		while (*(line + len) == '\n')
 		{
 			len += 1;
 		}
