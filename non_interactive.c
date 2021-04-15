@@ -9,7 +9,7 @@ int non_interactive(void)
 {
 	char *line = NULL;
 	char **arg = NULL;
-	int len = 0, status, aux_status;
+	int len = 0, status = 0, aux_status = 0;
 	char *aux = NULL;
 
 	line = _read();
