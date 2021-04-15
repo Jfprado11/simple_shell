@@ -9,7 +9,7 @@ int non_interactive(void)
 {
 	char *line = NULL;
 	char **arg = NULL;
-	int len = 0, status;
+	int len = 0, status, aux_status;
 	char *aux = NULL;
 
 	line = _read();
@@ -33,11 +33,12 @@ int non_interactive(void)
 			free(line);
 			return (0);
 		}
+		aux_status = status;
 		status = interpreter(arg);
 		free_matrix(arg);
 	}
 	free(line);
-	return (status);
+	return (aux_status);
 }
 
 /**
