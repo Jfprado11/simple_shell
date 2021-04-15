@@ -109,7 +109,7 @@ int interpreter(char **command)
 	if (path_name == NULL)
 	{
 		perror(command[0]);
-		return (1);
+		return (127);/*return 127*/
 	}
 	exec_result = execute(command, path_name);
 	if (stat_path == 0)

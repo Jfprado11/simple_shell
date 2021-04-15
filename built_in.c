@@ -43,13 +43,20 @@ int bi_help(char **command __attribute__((unused)))
 		{NULL, NULL, NULL}
 	};
 
-	while (built_cmp[i].name != NULL)
+	if (command[1] == NULL)
 	{
-		if (_strcmp(command[1], built_cmp[i].name) == 0)
+		read_textfile("display_help", 1024);
+	}
+	else
+	{
+		while (built_cmp[i].name != NULL)
 		{
-			read_textfile(built_cmp[i].doc_name, 1024);
+			if (_strcmp(command[1], built_cmp[i].name) == 0)
+			{
+				read_textfile(built_cmp[i].doc_name, 1024);
+			}
+			i++;
 		}
-		i++;
 	}
 	write(STDOUT_FILENO, "\n", 1);
 	return (1);

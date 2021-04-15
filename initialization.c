@@ -7,13 +7,19 @@
  */
 int main(void)
 {
+	int status = 1;
+
 	if (isatty(STDIN_FILENO))
 	{
-		interactive_mode();
+		status = interactive_mode();
 	}
 	else
 	{
-		non_interactive();
+		status = non_interactive();
 	}
-	return (0);
+	if (status == 1)
+	{
+		return (0);
+	}
+	return (status);
 }

@@ -1,4 +1,2 @@
-env_help
-	espacio para escribir
-
-	hola mundo
+env: env
+	prints all enviroments variables in the current machine.

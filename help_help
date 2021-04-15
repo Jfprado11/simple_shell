@@ -1,4 +1,3 @@
-help_help
-	espacio para escribir
-
-	hola mundo
+help: help [name_of_bilt-in_command]
+    Display information about builtin commands.
+    Displays brief summaries of builtin commands.

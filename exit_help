@@ -1,4 +1,2 @@
-exit_help
-	espacio para escribir
-
-	hola mundo
+exit: exit
+    Exit the shell.
