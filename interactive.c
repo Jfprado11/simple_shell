@@ -28,8 +28,11 @@ int interactive_mode(void)
 		}
 		arg = split_line(line); /*Convert the line to an array of arguments*/
 		aux_status = status;
-		status = interpreter(arg); /*type_of_function(arg)*/
-		free_matrix(arg);
+		if (arg)
+		{
+			status = interpreter(arg); /*type_of_function(arg)*/
+			free_matrix(arg);
+		}
 	}
 	return (aux_status);
 }

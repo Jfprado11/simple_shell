@@ -19,6 +19,7 @@ int non_interactive(void)
 	}
 	while (*(line + len))
 	{
+		aux_status = status;
 		while (*(line + len) == '\n')
 		{
 			len += 1;
@@ -26,16 +27,11 @@ int non_interactive(void)
 		aux = _strdupp(line + len);
 		len += _strlen(aux) + 1;
 		arg = split_line(aux);
-		if (arg == NULL)
+		if (arg)
 		{
-			free(arg);
-			free(aux);
-			free(line);
-			return (0);
+			status = interpreter(arg);
+			free_matrix(arg);
 		}
-		aux_status = status;
-		status = interpreter(arg);
-		free_matrix(arg);
 	}
 	free(line);
 	return (aux_status);

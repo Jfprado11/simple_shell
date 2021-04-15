@@ -15,18 +15,18 @@ char **split_line(char *line)
 
 	for (i = 0; line[i] != '\0'; i++)
 	{
-		if (line[i] != ' ')
+		if (line[i] != ' ' && line[i] != '\n')
 			check = 1;
 	}
-	bufsize = counter_words(line);
-	array_tokens = malloc(bufsize * sizeof(char *) + 1);
-	if (!array_tokens)
-		return (NULL); /*MENSAJE DE ERROR???????*/
 	if (check == 0)
 	{
 		free(line);
 		return (array_tokens);
 	}
+	bufsize = counter_words(line);
+	array_tokens = malloc(bufsize * sizeof(char *) + 1);
+	if (!array_tokens)
+		return (NULL); /*MENSAJE DE ERROR???????*/
 	single_token = strtok(line, delimit); /*MALLOC????*/
 	while (single_token)
 	{
